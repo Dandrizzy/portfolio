@@ -1,16 +1,29 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Form } from "react-router-dom";
+import { useCreateApi } from "../Hooks/useCreateApi";
+import { useCreate } from "../Hooks/useCreate";
+import SpinnerMini from "../ui/SpinnerMini";
 
 const Message = () => {
+
+ const { create: sendMessage } = useCreateApi({ key: 'portfolio' });
+
+ const { create, isCreating } = useCreate({ key: 'portfolio', fn: sendMessage });
 
  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
  const onSubmit = (data) => {
-  console.log(data);
-  if (!data) toast.error('No Value in the field');
-  toast.success('Message successfully sent');
-  reset();
+  create(data, {
+   onSuccess: () => {
+    toast.success('Message successfully sent');
+    reset();
+   }
+  });
+ };
+
+ const onError = (errors) => {
+  toast.error(errors);
  };
 
  return (
@@ -19,7 +32,7 @@ const Message = () => {
    <p className=" text-center py-8">
     Feel free to ask a question, share a proposal, or simply drop a greeting!
    </p>
-   <Form onSubmit={handleSubmit(onSubmit)} className=" grid py-8 gap-4">
+   <Form onSubmit={handleSubmit(onSubmit, onError)} className=" grid py-8 gap-4">
     <label htmlFor="name">Your Name:</label>
 
     <input {...register('name', { required: true, minLength: 3 })} type="text" id="name" placeholder="Enter your Name" className=" border-b outline-none pb-4 border-purple-500 text-purple-900 text-base placeholder:text-purple-900 " />
@@ -38,7 +51,7 @@ const Message = () => {
 
     {errors.message && <span className=" text-pink-700 bg-pink-200 py-2 px-4 rounded-full">⚠ Your <strong>message</strong> is required</span>}
 
-    <button type="submit" className=" mt-20 p-4 border border-purple-600 hover:bg-purple-300 text-purple-900 font-bold transition-colors duration-300 text-2xl disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:text-gray-700 disabled:border-gray-400" disabled={errors.name || errors.email || errors.message}>Send 🚀</button>
+    <button type="submit" className=" mt-20 p-4 border border-purple-600 hover:bg-purple-300 text-purple-900 font-bold transition-colors duration-300 text-2xl disabled:cursor-not-allowed disabled:hover:bg-gray-400 disabled:text-gray-700 disabled:border-gray-400" disabled={errors.name || errors.email || errors.message}>{isCreating ? <SpinnerMini /> : 'Send 🚀'}</button>
    </Form>
   </div>
  );

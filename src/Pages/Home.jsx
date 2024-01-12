@@ -1,6 +1,6 @@
 import Intro from "../Features/Intro";
 import Tech from "../Features/Tech";
-import Contact from "../ui/Contact";
+import Contact from "../Features/Contact";
 import Message from "../Features/Message";
 
 const Home = () => {

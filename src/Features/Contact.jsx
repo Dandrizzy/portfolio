@@ -16,7 +16,7 @@ const Contact = () => {
  };
 
  return (
-  <div className="mx-4 h-screen bg-purple-700 text-slate-100 p-16 [&>div]:cursor-pointer lg:text-2xl">
+  <div className="mx-4 min-h-screen bg-purple-700 text-slate-100 p-16 [&>div]:cursor-pointer lg:text-2xl">
    <h1 className=" sm:text-center border-dashed border-b-2 pb-2 text-base lg:text-4xl font-bold">SAY HELLO</h1>
    <div className=" sm:grid sm:grid-cols-2">
     <div className=" flex justify-start items-center gap-4 py-8" onClick={handleMail}>

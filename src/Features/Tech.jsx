@@ -5,7 +5,7 @@ import { SiReactquery, SiSupabase } from "react-icons/si";
 const Tech = () => {
  return (
   <div className=" bg-purple-200 min-h-screen">
-   <p className=" lg:text-6xl md:leading-5 text-center text-2xl md:text-4xl pt-20">Technologies I work with</p>
+   <p className=" lg:text-6xl md:leading-5 text-center text-2xl md:text-4xl py-20">Technologies I work with</p>
    <div className=" text-6xl grid grid-cols-2 max-w-xs mx-auto justify-items-center content-end h-3/5 md:h-3/4 md:text-[5rem] [&>*]:cursor-pointer  gap-10 md:gap-16">
     <div className=" text-sky-400" >
      <FaReact />
